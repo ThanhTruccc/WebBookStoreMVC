@@ -1,0 +1,120 @@
+﻿
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/Style.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    @using template.Models
+</head>
+<body>
+    @{
+        var u = Session["user"] as template.Models.KHACHHANG;
+    }
+    <header>
+        <div id="logo"><img src="~/Images/Images/LOGO.jpg"></div>
+        <div id="dn">
+            @*<img src="~/Images/Images/dangnhap.jpg" title="Đăng nhập">
+        <a href="@Url.Action("DangNhap", "Nguoidung")">Đăng nhập</a>
+        <a href="@Url.Action("Dangky", "Nguoidung")">Đăng ký</a>*@
+
+            @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+
+            @{
+                if (u == null)
+                {
+                    @*<img src="~/Images/Images/dangnhap.jpg" title="Đăng nhập">*@
+                    <a href="@Url.Action("DangNhap", "Nguoidung")">Đăng nhập</a>
+                    <a href="@Url.Action("Dangky", "Nguoidung")">Đăng ký</a>
+                    
+                }
+                else
+                {
+                         <a>
+                         Xin chào : @u.TenDN
+                         &nbsp;
+                             </a>
+                        <a style="color:red" href="/Nguoidung/DangXuat"> ĐĂNG XUẤT</a>
+                        
+                }
+            }
+        </div>
+    </header>
+    <nav>
+        <div id="subnav">
+            <ul>
+                <li><a href="Trangchu.html">TRANG CHỦ</a></li>
+                <li><a href="Gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="#">LIÊN HỆ</a></li>
+            </ul>
+            <div id="search">
+                <input type="text" size="36" name="tsearch" placeholder="Hãy nhập tên sách cần tìm. . .">
+                <input type="submit" value="Tìm sách" title="Tìm sách">
+            </div>
+        </div>
+    </nav>
+
+    <div id="body">
+        <img src="~/Images/Images/Slider.jpg">
+        <article>
+            <aside id="left">
+                <div id="menu">
+                    <div class="menu">
+
+                        <p><b> SÁCH THEO CHỦ ĐỀ </b></p>
+                        @Html.Action("Chude", "BookStore")
+                       
+                    </div>
+
+
+                    <div class="menu">
+                        <p><b> SÁCH THEO NHÀ XUẤT BẢN</b></p>
+                        @Html.Action("Nhaxuatban", "BookStore")
+                       
+            
+                    </div>
+                    </div>
+            </aside>
+            <section>
+                <p>Sách mới</p>
+                <div>
+                    @RenderBody()
+                </div>
+            </section>
+
+            <aside id="right">
+                <div id="sachbannhieu">
+                    <p>SÁCH BÁN CHẠY</p>
+                    <marquee direction="up" scrollamuont="3" scrolldelay="100" onmousemove="stop()" onmouseout="start()">
+                        <p><a href="#"><img src="~/Images/Images/Sach/TH008.jpg">Thủ Thuật Lập Trình Visual Basic 6</a></p>
+                        <p><a href="#"><img src="~/Images/Images/Sach/TH005.jpg">Hướng dẫn tự học Photoshop CS(Photoshop 6.0)</a></p>
+                        <p><a href="#"><img src="~/Images/Images/Sach/TH002.jpg">Căn Bản Về Photoshop CS Tinh Chỉnh Và Xử Lý Màu</a></p>
+                        <p><a href="#"><img src="~/Images/Images/Sach/THCB.jpg">Tin học Cơ bản</a></p>
+                    </marquee>
+                </div>
+                <div id="lienketwbsite">
+                    <p>LIÊN KẾT WEBSITE</p>
+                    <select onchange="window.open(this.options[this.selectedIndex].value_ ,blank)">
+                        <option selected="">-------- Tin Tuc --------</option>
+                        <option value="http://www.tdmu.edu.vn">ĐH Thủ Dầu Một</option>
+                        <option value="http://iteee.tdmu.edu.vn">Khoa CNTT</option>
+                    </select>
+                </div>
+                <div id="soluottruycap">
+                    <p>THỐNG KÊ TRUY CẬP</p>
+                    <h4>Tổng truy cập: 160</h4>
+                    <h4>Đang online: 3</h4>
+                </div>
+            </aside>
+        </article>
+        <footer>
+            <p>©2016 - Nhà sách ABC . Allright Reserved</p>
+            <p>Website được phát triển để sử dụng làm bài tập thực hành môn Thiết kế và Lập trình Web</p>
+            <p>Email: abc.thudaumotuniversity@gmail.com</p>
+        </footer>
+
+
+    </div>
+</body>
+</html>

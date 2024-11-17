@@ -1,0 +1,47 @@
+﻿
+<style type="text/css">
+    #Datmua a {
+        clear: both;
+        background-color: red;
+        color: white;
+        width: 120px;
+        height: 35px;
+        display: bloclk;
+        float: right;
+        text-align: center;
+        padding-top: 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        #Datmua a:hover {
+            background-color: gray;
+            color: red;
+        }
+</style>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutBookStore.cshtml";
+}
+
+<h2 style="text-align:center"> THÔNG TIN CHI TIẾT SÁCH</h2>
+<div>
+    <div style="width:40%; float:left; border-left:dotted 1px; border-color:azure">
+        <img src="~/Images/Images/Sach/@Model.HinhMinhHoa" width="100" />
+    </div>
+    <div style="width:60% ; float:left; padding:10px">
+        <h4 style="font-weight:bold;color:lightskyblue">Tên Sách: @Model.TenSach</h4>
+        <p style="text-align:justify"><span style="color:black;font-size:16pt"> @Model.DonGia VNĐ</span></p>
+    </div>
+    
+   
+</div>
+
+<div id="Datmua" style="width:100% ; float:right; padding:30px">
+    @using (@Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = @Model.MaSach, @strURL = Request.Url.ToString() }))
+    {
+        <input style="color: red; font-weight: bold" type="submit" value="Mua hàng" id="bgnGioHang" />
+    }
+
+</div>

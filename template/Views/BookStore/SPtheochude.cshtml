@@ -1,0 +1,43 @@
+﻿@model IEnumerable<template.Models.SACH>
+
+@{
+    ViewBag.Title = "SPtheochude";
+    Layout = "~/Views/Shared/_LayoutBookStore.cshtml";
+}
+<h3 style="text-align:center;color:red"> SÁCH THEO CHỦ ĐỀ </h3>
+<div class="column">
+    @foreach (var SACH in Model)
+    {
+        <div class="sach">
+            <div class="col-sm-12 col-lg-12 col-md-12">
+                <div class="thumbnail">
+                     <a href="@Url.Action("Detail", "BookStore", new { id = SACH.MaSach})">
+                        <img alt="@SACH.TenSach" class="hinhsach" src="~/Images/Images/Sach/@SACH.HinhMinhHoa" width="200" />
+                        <div class="tensach">
+                        <br />
+                        <h4>
+                            @SACH.TenSach
+                        </h4>
+                        <p></p>
+                         </div>
+
+                        <div class="ratings">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <p id="right">15 reviews</p>
+
+                        </div>
+
+                </a>
+                    </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+
+

@@ -1,0 +1,95 @@
+﻿@using template.Models;
+@model List<GIOHANG>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutBookStore.cshtml";
+}
+
+<h2 class=""> GIỎ HÀNG <i class="fa fa-shopping-cart"></i></h2>
+<br />
+
+<table class="table-hover table-bordered divGioHang">
+    <tr class="">
+
+
+        <th> Tên SP</th>
+
+        <th> Ảnh bìa</th>
+
+        <th> Đơn giá</th>
+
+        <th> Số lượng</th>
+
+        <th> Thành tiền</th>
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr class="th">
+
+
+            <td> @item.sTensp</td>
+
+            <td> <img src="@Url.Content("~/Images/Images/Sach/" +item.sAnhBia)" width="50" height="50" /></td>
+
+            <td>  @String.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+
+            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMasp }))
+            {
+                <td>@Html.TextBox("txtSoLuong", item.iSoLuong) </td>
+
+                <td>@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                <td>
+                    <input type="submit" value="Cập nhật" class="btn-secondary"  />
+                    <br />
+                    @*Xóa giỏ hàng gọi về Action XoaGioHang*@
+                    <button class="btn-success">@Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMasp })</button>
+                </td>
+            }
+
+        </tr>
+
+    }
+
+    <tr>
+        <td colspan="4" style="text-align: right; border: 1px solid black; ">Số lượng sách: @Model.Sum(n => n.iSoLuong) </td>
+        <td colspan="2" style="text-align: right; border: 1px solid black;">Tổng tiền: @((float?)Model.Sum(m => m.ThanhTien)) VNĐ </td>
+    </tr>
+
+
+    <tr>
+        <td colspan="6" style="text-align:right;color:red">
+            @using (Html.BeginForm("DatHang", "GioHang", new { @class = "" }))
+            {
+                <input type="submit" value="Đặt hàng" class="btn-danger" />
+            }
+        </td>
+    </tr>
+</table>
+
+@*Css giỏ hàng*@
+<style type="text/css">
+    .divGioHang {
+        border: 1px solid black;
+        margin-left: 10%;
+        font-size: large
+    }
+
+        .divGioHang td {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: center
+        }
+
+        .divGioHang th {
+            text-align: center
+        }
+   .btn-secondary {
+       color: lightpink;
+       border: none;
+   }
+
+    
+</style>
